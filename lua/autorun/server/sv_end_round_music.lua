@@ -57,6 +57,39 @@ END_OF_ROUND_SOUNDS = {
 
 	}
 
+-- TODO
+-- 1st check how many music files are in round/ and assign every sound variable its number
+-- 2nd percentage impleme
+
+-- IDEA
+-- 1. declare every song number as 0
+-- 2. reduce the song number to be below 0 if selected
+-- 3. check song numbers if they are below 0
+-- 4. if they are, increase them by 1 every round
+-- 5. only songs with number 0 can be played
+
+
+	-- prov. sound files
+sound1 = "round/sound1.mp3"
+sound2 = "round/sound2.mp3"
+sound3 = "round/sound3.mp3"
+sound4 = "round/sound4.mp3"
+sound5 = "round/sound5.mp3"
+sound6 = "round/sound6.mp3"
+sound7 = "round/sound7.mp3"
+sound8 = "round/sound8.mp3"
+
+	-- prov. percentage
+sound1_percentage = 100
+sound2_percentage = 100
+sound3_percentage = 100
+sound4_percentage = 100
+sound5_percentage = 100
+sound6_percentage = 100
+sound7_percentage = 100
+sound8_percentage = 100
+
+
 // You must define a default sound to play if some of your lists above are empty.
 END_OF_ROUND_WIN_DEFAULT_SOUND = "round/sound1.mp3";
 
@@ -70,7 +103,7 @@ if ( SERVER ) then
 		local _sound = END_OF_ROUND_WIN_DEFAULT_SOUND
 
 		if wintype == WIN_INNOCENT or wintype == WIN_TRAITOR or wintype == WIN_TIMELIMIT then
-			_sound = "round/sound2.mp3";
+			_sound = table.Random( END_OF_ROUND_SOUNDS );
 		end
 
 		-- if wintype == WIN_INNOCENT then
@@ -81,6 +114,10 @@ if ( SERVER ) then
 		--	_sound = table.Random( END_OF_ROUND_SOUNDS );
 		-- end
 
+
+
+
+-- end of server shit
 		net.Start( "_ttt_end_round_music" );
 			net.WriteString( _sound );
 		net.Broadcast( );
